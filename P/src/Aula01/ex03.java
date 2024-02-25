@@ -5,14 +5,16 @@ import java.util.Scanner;
 
 public class ex03 {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         Stack<Double> stack = new Stack<Double>();
         double num;
         String var;
         double n1, n2;
         double res = 0;
 
-        if (sc.hasNext()) {
+        Scanner sc = new Scanner(scanner.nextLine()); 
+
+        while (sc.hasNext()) {
             if (sc.hasNextDouble()) {
                 num = sc.nextDouble();
                 stack.push(num);
@@ -43,6 +45,8 @@ public class ex03 {
             System.exit(1);
         }
 
+        res = stack.pop();
+        scanner.close();
         sc.close();
         System.out.println("Result = " + res);
     }
