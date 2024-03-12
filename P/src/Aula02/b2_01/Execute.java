@@ -1,30 +1,28 @@
-package b2_01;
+package Aula02.b2_01;
 
-import java.util.Iterator;
+import org.antlr.v4.runtime.tree.TerminalNode;
 
 @SuppressWarnings("CheckReturnValue")
 public class Execute extends HelloBaseVisitor<String> {
-    
-    @Override public String visitGreetings(HelloParser.GreetingsContext ctx) {
-        System.out.println("Hello World");
-        return "null";
-    }
 
-    @Override public String visitBye(HelloParser.ByeContext ctx) {
-        String res = null;
-        return visitChildren(ctx);
-    }
+   @Override
+   public String visitGreeting(HelloParser.GreetingsContext ctx) {
+      System.out.print("Hello,");
+      for (TerminalNode name : ctx.ID()) {
+         System.out.print(" " + name.getText());
+      }
+      System.out.println("!");      
+      return null;
+   }
 
-    @Override public String visitName(HelloParser.NameContext ctx) {
-        String res = "";
-        Iterator<HelloParser.WordContext> iterator = ctx.word().iterator();
-        while(iterator.hasNext()) {
-            res += (res.isEmpty() ? "" : " ") + visit(iterator.next());
-        }
-        return res;
-    }
+   @Override
+   public String visitBye(HelloParser.ByeContext ctx) {
+      System.out.print("Goodbye,");
+      for (TerminalNode name : ctx.ID()) {
+         System.out.print(" " + name.getText());
+      }
+      System.out.println("!");  
+      return null;
+   }   
 
-    @Override public String visitWord(HelloParser.WordContext ctx) {
-        return ctx.ID().getText();
-    }
 }
