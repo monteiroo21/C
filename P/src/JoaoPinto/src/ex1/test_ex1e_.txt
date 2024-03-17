@@ -1,0 +1,3 @@
+hello Compiler Class
+bye   Compiler Class
+xpto

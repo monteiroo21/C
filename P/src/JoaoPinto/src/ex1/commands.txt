@@ -1,0 +1,3 @@
+hello compiladores
+hello so
+hello joao
