@@ -1,36 +1,37 @@
-package Aula02.b2_02;
-
 import java.io.IOException;
-
-import Aula02.b2_01.Execute;
-
-import java.util.*;
+import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.tree.*;
 
 public class SuffixCalculatorMain {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String lineText = null;
-        int numLine = 1;
-        if (sc.hasNextLine())
-            lineText = sc.nextLine();
-        SuffixCalculatorParser parser = new SuffixCalculatorParser(null);
-
-        Interpreter visitor0 = new Interpreter();
-        while(lineText != null) {
-            CharStream input = CharStreams.fromString(lineTest + "\n");
-
-            SuffixCalculatorLexer lexer = new SuffixCalculatorLexer(input);
-            lexer.setLine(numLine);
-            lexer.setCharPositioninLine(0);
-
-            CommonTokenStream tokens = new CommonTokenStream(lexer);
-            parser.setInputStream(tokens);
-
-            ParseTree tree = parser.program();
-            if (parser.getNumberOfSyntaxErrors() == 0) {
-                visitor0.visit(tree);
-            }
-        }
-    }
-    
+   public static void main(String[] args) {
+      try {
+         // create a CharStream that reads from standard input:
+         CharStream input = CharStreams.fromStream(System.in);
+         // create a lexer that feeds off of input CharStream:
+         SuffixCalculatorLexer lexer = new SuffixCalculatorLexer(input);
+         // create a buffer of tokens pulled from the lexer:
+         CommonTokenStream tokens = new CommonTokenStream(lexer);
+         // create a parser that feeds off the tokens buffer:
+         SuffixCalculatorParser parser = new SuffixCalculatorParser(tokens);
+         // replace error listener:
+         //parser.removeErrorListeners(); // remove ConsoleErrorListener
+         //parser.addErrorListener(new ErrorHandlingListener());
+         // begin parsing at program rule:
+         ParseTree tree = parser.program();
+         if (parser.getNumberOfSyntaxErrors() == 0) {
+            // print LISP-style tree:
+            // System.out.println(tree.toStringTree(parser));
+            Execute visitor0 = new Execute();
+            visitor0.visit(tree);
+         }
+      }
+      catch(IOException e) {
+         e.printStackTrace();
+         System.exit(1);
+      }
+      catch(RecognitionException e) {
+         e.printStackTrace();
+         System.exit(1);
+      }
+   }
 }
