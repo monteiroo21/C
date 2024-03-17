@@ -1,0 +1,28 @@
+cat commands.txt | antlr4-test -gui
+antlr4-visitor Hello Execute String       -> cria o ficheiro "Execute.java" 
+antlr4-main Hello greetings -v Execute
+antlr4-build 
+cat commands.txt | antlr4-run
+
+
+Nota: se mudarmos gramática ou Execute temos que fazer "antlr4-build" !
+
+antlr4-build 
+cat test.txt | antlr4-run
+
+antlr4-clean   (é inteligente e não elimina "Execute.java")
+
+# Comandos para correr ex 1c)
+antlr4-clean
+antlr4-visitor Hello Execute2 String (depois copiar os métodos que me interessam para o Execute.java)
+antlr4-main Hello main -v Execute  (tive que associar o main ao visitor. Nota: se já tiver o HelloMain.java eliminá-lo manualmente. Nota2) tenho que ter a palavra "main" no Hello.g4: (main: (greetings | bye)*;)) 
+antlr4-build
+cat test_ex1c_.txt | antlr4-run
+
+
+# Comandos para correr ex 1e)
+antlr4-clean
+antlr4-visitor Hello Execute2 String (depois copiar os métodos que me interessam para o Execute.java)
+antlr4-main Hello main -v Execute  (tive que associar o main ao visitor. Nota: se já tiver o HelloMain.java eliminá-lo manualmente) 
+antlr4-build
+cat test_ex1e_.txt | antlr4-run
