@@ -111,6 +111,11 @@ public class CalculatorParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitProgram(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitProgram(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final ProgramContext program() throws RecognitionException {
@@ -166,6 +171,11 @@ public class CalculatorParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitStat(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitStat(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -231,6 +241,11 @@ public class CalculatorParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitExprAddSub(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitExprAddSub(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ExprParentContext extends ExprContext {
@@ -246,6 +261,11 @@ public class CalculatorParser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitExprParent(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitExprParent(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ExprIntegerContext extends ExprContext {
@@ -258,6 +278,11 @@ public class CalculatorParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitExprInteger(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitExprInteger(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 	@SuppressWarnings("CheckReturnValue")
@@ -277,6 +302,11 @@ public class CalculatorParser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof CalculatorListener ) ((CalculatorListener)listener).exitExprMultDivMod(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CalculatorVisitor ) return ((CalculatorVisitor<? extends T>)visitor).visitExprMultDivMod(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
