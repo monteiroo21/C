@@ -47,6 +47,19 @@ public class Execute extends CalculatorBaseVisitor<Long> {
       return res;
    }
 
+   @Override public Long visitExprUnary(CalculatorParser.ExprUnaryContext ctx) {
+      Long res = null;
+      
+      String op = ctx.op.getText();
+      if(op.equals("-")){
+         res = -visit(ctx.expr());
+      }else{
+         res = visit(ctx.expr());
+      }
+
+      return res;
+   }
+
    @Override public Long visitExprInteger(CalculatorParser.ExprIntegerContext ctx) {
       // Long res = null;
       return Long.parseLong(ctx.Integer().getText());
