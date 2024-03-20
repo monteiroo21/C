@@ -1,4 +1,4 @@
-grammar numbers;
+grammar Numbers;
 
 program: stat* EOF;
 stat: expr ? NEWLINE;
